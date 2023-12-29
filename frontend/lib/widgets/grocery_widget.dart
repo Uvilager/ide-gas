@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:frontend/models/grocery_model.dart';
 
 class GroceryWidget extends StatelessWidget {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:frontend/models/grocery_model.dart';
 import 'package:frontend/providers/grocery_repository.dart';
+import 'package:frontend/screens/add_grocery_screen.dart';
 import 'package:frontend/widgets/grocery_widget.dart';
 
 class GroceriesScreen extends ConsumerWidget {
@@ -26,6 +28,8 @@ class GroceriesScreen extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // TODO Add new Grocery
+          Navigator.push(context,
+              MaterialPageRoute(builder: (_) => const AddGroceryScreen()));
         },
         child: const Icon(Icons.add),
       ),

@@ -12,7 +12,6 @@ class GroceryRepository {
       final List<dynamic> data = json.decode(response.body);
       final List<Grocery> groceries =
           data.map((item) => Grocery.fromMap(item)).toList();
-      print(groceries);
       return groceries;
     } else {
       throw Exception('Failed to fetch groceries');
