@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/main_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend/screens/groceries_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: MainScreen(),
+      home: const GroceriesScreen(),
     );
   }
 }

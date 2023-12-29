@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:frontend/models/grocery_model.dart';
@@ -18,3 +19,14 @@ class GroceryRepository {
     }
   }
 }
+
+final groceryRepositoryProvider = Provider<GroceryRepository>((ref) {
+  return GroceryRepository();
+});
+
+final groceriesProvider = FutureProvider<List<Grocery>>(
+  (ref) {
+    final groceryRepository = ref.watch(groceryRepositoryProvider);
+    return groceryRepository.fetchGroceries();
+  },
+);
