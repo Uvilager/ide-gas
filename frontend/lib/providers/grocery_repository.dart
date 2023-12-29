@@ -17,6 +17,31 @@ class GroceryRepository {
       throw Exception('Failed to fetch groceries');
     }
   }
+
+  Future<void> addGrocery(String name, int quantity) async {
+    final url = Uri.parse('http://192.168.100.29:3000/groceries');
+    final Map<String, dynamic> data = {
+      'name': name,
+      'quantity': quantity,
+    };
+    try {
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode(data),
+      );
+      if (response.statusCode == 201) {
+        // Successful POST request (status code 201 Created)
+        print('Grocery added successfully!');
+      } else {
+        // Handle other status codes or errors
+        print('Failed to add grocery. Status code: ${response.statusCode}');
+      }
+    } catch (error) {
+      // Handle network or server errors
+      print('Error adding grocery: $error');
+    }
+  }
 }
 
 final groceryRepositoryProvider = Provider<GroceryRepository>((ref) {

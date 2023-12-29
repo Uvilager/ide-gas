@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:frontend/models/grocery_model.dart';
-import 'package:frontend/providers/grocery_repository.dart';
+import 'package:frontend/providers/grocery_notifier_repository.dart';
 import 'package:frontend/screens/add_grocery_screen.dart';
 import 'package:frontend/widgets/grocery_widget.dart';
 
@@ -11,7 +11,7 @@ class GroceriesScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final groceries = ref.watch(groceriesProvider);
+    final groceries = ref.watch(groceryNotifierProvider);
     return groceries.when(
       data: (data) => _buildGroceryList(context, data, ref),
       loading: () => const Center(child: CircularProgressIndicator()),
@@ -27,9 +27,11 @@ class GroceriesScreen extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // TODO Add new Grocery
-          Navigator.push(context,
-              MaterialPageRoute(builder: (_) => const AddGroceryScreen()));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (_) =>
+                      const AddGroceryScreen(title: 'Add Grocery')));
         },
         child: const Icon(Icons.add),
       ),
