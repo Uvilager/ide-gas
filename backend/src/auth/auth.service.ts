@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
 
 import { SignUpDto } from './dto/sign-up.dto';
 import { SignInDto } from './dto/sign-in.dto';
@@ -11,6 +12,7 @@ import { User } from 'src/users/entities/user.entity';
 export class AuthService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
+    private jwtService: JwtService,
   ) {}
 
   async register(signUpDto: SignUpDto): Promise<User> {
@@ -28,7 +30,7 @@ export class AuthService {
     }
   }
 
-  async login(signInDto: SignInDto): Promise<User> {
+  async login(signInDto: SignInDto) {
     const { email, password } = signInDto;
     const user = await this.userRepository.findOne({ where: { email } });
     if (!user) {
@@ -38,6 +40,7 @@ export class AuthService {
     if (!isPasswordValid) {
       throw new Error('Invalid password');
     }
-    return user;
+    const payload = { sub: user.id, username: user.username };
+    return { ...user, access_token: await this.jwtService.signAsync(payload) };
   }
 }
