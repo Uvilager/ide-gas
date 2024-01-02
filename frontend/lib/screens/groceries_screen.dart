@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/models/grocery_model.dart';
 import 'package:frontend/providers/grocery_notifier_repository.dart';
 import 'package:frontend/screens/add_grocery_screen.dart';
+import 'package:frontend/widgets/drawer_widget.dart';
 import 'package:frontend/widgets/grocery_widget.dart';
 
 class GroceriesScreen extends ConsumerWidget {
@@ -22,6 +23,7 @@ class GroceriesScreen extends ConsumerWidget {
   Widget _buildGroceryList(
       BuildContext context, List<Grocery> groceries, WidgetRef ref) {
     return Scaffold(
+      drawer: const DrawerWidget(),
       appBar: AppBar(
         title: const Text('Your Groceries'),
       ),

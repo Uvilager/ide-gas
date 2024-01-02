@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:frontend/models/grocery_model.dart';
 
+// NOT USED CURRENTLY !!!
 class GroceryRepository {
   Future<List<Grocery>> fetchGroceries() async {
     final response =
