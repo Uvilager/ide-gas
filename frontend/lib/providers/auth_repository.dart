@@ -32,6 +32,24 @@ class AuthNotifier extends AsyncNotifier<User?> {
   Future<void> logout() async {
     state = const AsyncValue.data(null);
   }
+
+  Future<void> register(String name, String email, String password) async {
+    try {
+      final response = await http
+          .post(Uri.parse('http://192.168.100.29:3000/auth/register'), body: {
+        'username': name,
+        'email': email,
+        'password': password,
+      });
+      if (response.statusCode == 201) {
+        ref.read(authNotifierProvider.notifier).login(email, password);
+      } else {
+        throw Exception('Failed to load user');
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 }
 
 final authNotifierProvider =

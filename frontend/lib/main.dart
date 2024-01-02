@@ -12,6 +12,7 @@ void main() {
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
+  // TODO Migrate from HTTP to DIO and implement Interceptors for Error/Sucess Handling
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
