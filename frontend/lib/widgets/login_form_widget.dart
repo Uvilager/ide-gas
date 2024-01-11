@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:frontend/providers/auth_repository.dart';
-import 'package:frontend/screens/register_screen.dart';
 
 class LoginForm extends ConsumerStatefulWidget {
   const LoginForm({super.key});
@@ -64,13 +64,13 @@ class _LoginFormState extends ConsumerState<LoginForm> {
           const SizedBox(height: 16.0),
           TextButton(
             onPressed: () {
-              // TODO: Implement sign up logic
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const RegisterScreen(),
-                ),
-              );
+              context.go('/register');
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => const RegisterScreen(),
+              //   ),
+              // );
               print('Sign Up button pressed');
             },
             child: const Text('Not registered? Sign Up'),

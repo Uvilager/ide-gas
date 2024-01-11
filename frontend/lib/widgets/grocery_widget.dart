@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:frontend/models/grocery_model.dart';
 import 'package:frontend/providers/grocery_notifier_repository.dart';
-import 'package:frontend/screens/add_grocery_screen.dart';
 
 class GroceryWidget extends ConsumerWidget {
   const GroceryWidget({super.key, required this.grocery});
@@ -15,15 +15,16 @@ class GroceryWidget extends ConsumerWidget {
     return InkWell(
       onTap: () {
         // Navigate to the grocery details page
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => AddGroceryScreen(
-              grocery: grocery,
-              title: 'Edit Grocery',
-            ),
-          ),
-        );
+        context.go('/groceries/${grocery.id}');
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (_) => AddGroceryScreen(
+        //       grocery: grocery,
+        //       title: 'Edit Grocery',
+        //     ),
+        //   ),
+        // );
       },
       child: Dismissible(
         key: Key(grocery.name),
