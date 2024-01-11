@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:frontend/routing/app_router.dart';
-import 'package:frontend/providers/auth_repository.dart';
-import 'package:frontend/screens/groceries_screen.dart';
-import 'package:frontend/screens/main_screen.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -17,6 +14,7 @@ class MyApp extends ConsumerWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
     // final user = ref.watch(authNotifierProvider);
     return MaterialApp.router(
       routerConfig: router,
