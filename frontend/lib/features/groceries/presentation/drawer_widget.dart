@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:frontend/providers/auth_repository.dart';
+import 'package:frontend/features/auth/data/auth_repository.dart';
 
 class DrawerWidget extends ConsumerWidget {
   const DrawerWidget({super.key});

@@ -13,9 +13,13 @@ export class GroceriesService {
   ) {}
 
   // Create a Grocery
-  async create(createGroceryDto: CreateGroceryDto): Promise<Grocery> {
+  async create(req, createGroceryDto: CreateGroceryDto): Promise<Grocery> {
     try {
-      const response = await this.groceryRepository.save(createGroceryDto);
+      const grocery = new Grocery();
+      grocery.name = createGroceryDto.name;
+      grocery.quantity = createGroceryDto.quantity;
+      grocery.user = req.user;
+      const response = await this.groceryRepository.save(grocery);
       return response;
     } catch (error) {
       console.log(error);
@@ -24,9 +28,11 @@ export class GroceriesService {
   }
 
   // Fetch all Groceries
-  async findAll(): Promise<Grocery[]> {
+  async findAll(req): Promise<Grocery[]> {
     try {
-      const response = await this.groceryRepository.find();
+      const response = await this.groceryRepository.find({
+        where: { user: req.user },
+      });
       return response;
     } catch (error) {
       console.log(error);

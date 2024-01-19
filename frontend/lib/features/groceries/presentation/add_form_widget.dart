@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:frontend/providers/grocery_notifier_repository.dart';
+import 'package:frontend/features/groceries/data/grocery_notifier_repository.dart';
 
 class AddGroceryWidget extends ConsumerStatefulWidget {
   const AddGroceryWidget({super.key, required this.title, this.id});
   final String title;
-  final int? id;
+  final String? id;
 
   @override
   ConsumerState<AddGroceryWidget> createState() => _AddGroceryWidgetState();

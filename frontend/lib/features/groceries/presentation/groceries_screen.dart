@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:frontend/models/grocery_model.dart';
-import 'package:frontend/providers/grocery_notifier_repository.dart';
-import 'package:frontend/widgets/drawer_widget.dart';
-import 'package:frontend/widgets/grocery_widget.dart';
+import 'package:frontend/features/groceries/models/grocery_model.dart';
+import 'package:frontend/features/groceries/data/grocery_notifier_repository.dart';
+import 'package:frontend/features/groceries/presentation/drawer_widget.dart';
+import 'package:frontend/features/groceries/presentation/grocery_widget.dart';
 
 class GroceriesScreen extends ConsumerWidget {
   const GroceriesScreen({super.key});

@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:frontend/features/auth/data/auth_repository.dart';
 
-import 'package:frontend/providers/auth_repository.dart';
-
-class LoginForm extends ConsumerStatefulWidget {
-  const LoginForm({super.key});
+class RegisterForm extends ConsumerStatefulWidget {
+  const RegisterForm({super.key});
 
   @override
-  ConsumerState<LoginForm> createState() => _LoginFormState();
+  ConsumerState<RegisterForm> createState() => _RegisterFormState();
 }
 
-class _LoginFormState extends ConsumerState<LoginForm> {
+class _RegisterFormState extends ConsumerState<RegisterForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -22,6 +21,19 @@ class _LoginFormState extends ConsumerState<LoginForm> {
       key: _formKey,
       child: Column(
         children: [
+          TextFormField(
+            controller: _usernameController,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter your username';
+              }
+              return null;
+            },
+            decoration: const InputDecoration(
+              labelText: 'Username',
+            ),
+          ),
+          const SizedBox(height: 16.0),
           TextFormField(
             controller: _emailController,
             validator: (value) {
@@ -52,28 +64,15 @@ class _LoginFormState extends ConsumerState<LoginForm> {
           ElevatedButton(
             onPressed: () {
               if (_formKey.currentState!.validate()) {
-                ref
-                    .read(authNotifierProvider.notifier)
-                    .login(_emailController.text, _passwordController.text);
-                _emailController.clear();
-                _passwordController.clear();
+                ref.read(authNotifierProvider.notifier).register(
+                      _usernameController.text,
+                      _emailController.text,
+                      _passwordController.text,
+                    );
+                print('Registration button pressed');
               }
             },
-            child: const Text('Login'),
-          ),
-          const SizedBox(height: 16.0),
-          TextButton(
-            onPressed: () {
-              context.go('/register');
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => const RegisterScreen(),
-              //   ),
-              // );
-              print('Sign Up button pressed');
-            },
-            child: const Text('Not registered? Sign Up'),
+            child: const Text('Register'),
           ),
         ],
       ),

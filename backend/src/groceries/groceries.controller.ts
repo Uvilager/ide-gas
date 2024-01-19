@@ -6,24 +6,31 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
+  Req,
 } from '@nestjs/common';
 import { GroceriesService } from './groceries.service';
 import { CreateGroceryDto } from './dto/create-grocery.dto';
 import { UpdateGroceryDto } from './dto/update-grocery.dto';
 import { Grocery } from './entities/grocery.entity';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('groceries')
+@UseGuards(AuthGuard('jwt'))
 export class GroceriesController {
   constructor(private readonly groceriesService: GroceriesService) {}
 
   @Post()
-  create(@Body() createGroceryDto: CreateGroceryDto): Promise<Grocery> {
-    return this.groceriesService.create(createGroceryDto);
+  create(
+    @Req() req,
+    @Body() createGroceryDto: CreateGroceryDto,
+  ): Promise<Grocery> {
+    return this.groceriesService.create(req, createGroceryDto);
   }
 
   @Get()
-  findAll(): Promise<Grocery[]> {
-    return this.groceriesService.findAll();
+  findAll(@Req() req): Promise<Grocery[]> {
+    return this.groceriesService.findAll(req);
   }
 
   @Get(':id')

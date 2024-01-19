@@ -3,14 +3,16 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:frontend/models/user_model.dart';
+import 'package:frontend/features/auth/models/user_model.dart';
 
+// Auth Notifier
 class AuthNotifier extends AsyncNotifier<User?> {
   @override
   FutureOr<User?> build() {
     return null;
   }
 
+  // Login user still in HTTP
   Future<void> login(String email, String password) async {
     try {
       final response = await http
@@ -29,10 +31,12 @@ class AuthNotifier extends AsyncNotifier<User?> {
     }
   }
 
+  // Logout user still in HTTP
   Future<void> logout() async {
     state = const AsyncValue.data(null);
   }
 
+  // Register user still in HTTP
   Future<void> register(String name, String email, String password) async {
     try {
       final response = await http
@@ -52,5 +56,6 @@ class AuthNotifier extends AsyncNotifier<User?> {
   }
 }
 
+// Auth Notifier Provider
 final authNotifierProvider =
     AsyncNotifierProvider<AuthNotifier, User?>(() => AuthNotifier());
