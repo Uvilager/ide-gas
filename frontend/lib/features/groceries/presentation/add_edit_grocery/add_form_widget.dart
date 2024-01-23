@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:frontend/features/groceries/data/grocery_notifier_repository.dart';
+import 'package:frontend/features/groceries/presentation/controllers/grocery_controller.dart';
 
 class AddGroceryWidget extends ConsumerStatefulWidget {
   const AddGroceryWidget({super.key, required this.title, this.id});
@@ -37,6 +37,22 @@ class _AddGroceryWidgetState extends ConsumerState<AddGroceryWidget> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen<AsyncValue>(groceryControllerProvider, (previous, next) {
+      ScaffoldMessenger.of(context).clearSnackBars();
+      if (next.hasError) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to ${widget.title.toLowerCase()}'),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Successful ${widget.title.toLowerCase()}'),
+          ),
+        );
+      }
+    });
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Form(
@@ -64,11 +80,12 @@ class _AddGroceryWidgetState extends ConsumerState<AddGroceryWidget> {
                   String name = nameController.text.trim();
                   int quantity = int.parse(quantityController.text);
                   if (widget.title == 'Add Grocery') {
-                    ref
-                        .read(groceryNotifierProvider.notifier)
-                        .addGrocery(name, quantity);
+                    ref.read(groceryControllerProvider.notifier).addGrocery(
+                          name,
+                          quantity,
+                        );
                   } else {
-                    ref.read(groceryNotifierProvider.notifier).updateGrocery(
+                    ref.read(groceryControllerProvider.notifier).updateGrocery(
                           widget.id!,
                           name,
                           quantity,
@@ -76,7 +93,7 @@ class _AddGroceryWidgetState extends ConsumerState<AddGroceryWidget> {
                   }
                   nameController.clear();
                   quantityController.clear();
-                  // Navigator.pop(context); // Close the form after submission
+                  // Close the form after submission
                 } else {
                   // Show an error message or handle invalid input
                 }

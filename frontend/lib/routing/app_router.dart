@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:frontend/features/auth/data/auth_repository.dart';
-import 'package:frontend/features/groceries/presentation/add_grocery_screen.dart';
+import 'package:frontend/features/groceries/presentation/add_edit_grocery/add_grocery_screen.dart';
 import 'package:frontend/features/auth/presentation/register/register_screen.dart';
 import 'package:frontend/features/groceries/presentation/groceries_screen.dart';
 import 'package:frontend/features/auth/presentation/login/main_screen.dart';

@@ -65,12 +65,6 @@ class _LoginFormState extends ConsumerState<LoginForm> {
           TextButton(
             onPressed: () {
               context.go('/register');
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => const RegisterScreen(),
-              //   ),
-              // );
               print('Sign Up button pressed');
             },
             child: const Text('Not registered? Sign Up'),
