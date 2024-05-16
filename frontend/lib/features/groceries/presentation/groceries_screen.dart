@@ -14,6 +14,7 @@ class GroceriesScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final groceries = ref.watch(groceriesProvider);
     return groceries.when(
+      skipLoadingOnReload: true,
       data: (data) => _buildGroceryList(context, data, ref),
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stack) => Text(error.toString()),
@@ -24,9 +25,13 @@ class GroceriesScreen extends ConsumerWidget {
       BuildContext context, List<Grocery> groceries, WidgetRef ref) {
     return Scaffold(
       drawer: const DrawerWidget(),
-      appBar: AppBar(
-        title: const Text('Your Groceries'),
-      ),
+      appBar: AppBar(title: const Text('Your Groceries'), actions: [
+        //** IconButton to go to the cart */
+        IconButton(
+          icon: const Icon(Icons.shopping_cart),
+          onPressed: () => context.go('/cart'),
+        )
+      ]),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           context.go('/groceries/add');

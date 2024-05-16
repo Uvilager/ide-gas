@@ -22,7 +22,7 @@ final groceryRepositoryProvider =
 );
 
 typedef GroceryRepositoryRef = AutoDisposeProviderRef<GroceryRepository>;
-String _$groceriesHash() => r'c2a398553c9472606ce71468672a33bb8fff9e72';
+String _$groceriesHash() => r'916479e9a2dfb6601dc46fc2feb4b54265202c59';
 
 /// See also [groceries].
 @ProviderFor(groceries)

@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'grocery_controller.dart';
+part of 'local_cart_repository.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$groceryControllerHash() => r'1b1f8b6f5f179208fbc7a39382ef6df0b9588a64';
+String _$localCartRepositoryHash() =>
+    r'e13ac4190cf19fa3f638b583d346d5145c6f6a1e';
 
-/// See also [GroceryController].
-@ProviderFor(GroceryController)
-final groceryControllerProvider =
-    AutoDisposeAsyncNotifierProvider<GroceryController, void>.internal(
-  GroceryController.new,
-  name: r'groceryControllerProvider',
+/// See also [localCartRepository].
+@ProviderFor(localCartRepository)
+final localCartRepositoryProvider = Provider<LocalCartRepository>.internal(
+  localCartRepository,
+  name: r'localCartRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$groceryControllerHash,
+      : _$localCartRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$GroceryController = AutoDisposeAsyncNotifier<void>;
+typedef LocalCartRepositoryRef = ProviderRef<LocalCartRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

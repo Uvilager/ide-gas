@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend/features/cart/data/local_cart_repository.dart';
 
+import 'package:frontend/features/cart/data/sembast_cart_repository.dart';
 import 'package:frontend/routing/app_router.dart';
 
-void main() {
-  runApp(const ProviderScope(child: MyApp()));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final localCartRepository = await SembastCartRepository.create();
+
+  runApp(
+    ProviderScope(
+      overrides: [
+        localCartRepositoryProvider.overrideWithValue(localCartRepository),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends ConsumerWidget {
